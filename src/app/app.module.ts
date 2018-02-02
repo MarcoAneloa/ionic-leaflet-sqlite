@@ -3,14 +3,19 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
+import { SQLite } from '@ionic-native/sqlite';
+
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { MisTabsPage } from '../pages/mis-tabs/mis-tabs';
+import { DbProvider } from '../providers/db/db';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    MisTabsPage
   ],
   imports: [
     BrowserModule,
@@ -19,12 +24,16 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    MisTabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geolocation,
+    Camera,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DbProvider,
+    SQLite
   ]
 })
 export class AppModule {}
