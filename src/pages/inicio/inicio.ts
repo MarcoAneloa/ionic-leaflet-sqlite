@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
-
-declare var google: any;
-
-
+import L from "leaflet";
 
 
 /**
@@ -22,8 +19,19 @@ declare var google: any;
 })
 export class InicioPage {
 
-  map: any; // Manejador del mapa.
+  map: L.Map;
   coords : any = { lat: 0, lng: 0 }
+
+  greenIcon:any = L.icon({
+    iconUrl: 'leaf-green.png',
+    shadowUrl: 'leaf-shadow.png',
+
+    iconSize:     [38, 95], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public  platform: Platform,
    public geolocation: Geolocation,public modalCtrl : ModalController,) {
@@ -36,18 +44,16 @@ export class InicioPage {
   }
 
   loadMap(){
-   let mapContainer = document.getElementById('map');
-    this.map = new google.maps.Map(mapContainer, {
+  this.map = L.map('map', {
       center: this.coords,
-      zoom: 12
+      zoom: 15
     });
 
-    // Colocamos el marcador
-    let miMarker = new google.maps.Marker({
-              icon : 'assets/imgs/ico_estoy_aqui.png',
-              map: this.map,
-              position: this.coords
-          });
+  L.marker(this.coords).addTo(this.map);
+
+    //Add OSM Layer
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+      .addTo(this.map);
 
   }
 
