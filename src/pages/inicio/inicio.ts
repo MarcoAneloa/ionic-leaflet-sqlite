@@ -23,15 +23,15 @@ export class InicioPage {
   coords : any = { lat: 0, lng: 0 }
 
   greenIcon:any = L.icon({
-    iconUrl: 'leaf-green.png',
-    shadowUrl: 'leaf-shadow.png',
+    iconUrl: 'assets/imgs/leaf-green.png',
+    shadowUrl: 'assets/imgs/leaf-shadow.png',
 
     iconSize:     [38, 95], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
+  });
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public  platform: Platform,
    public geolocation: Geolocation,public modalCtrl : ModalController,) {
@@ -49,7 +49,7 @@ export class InicioPage {
       zoom: 15
     });
 
-  L.marker(this.coords).addTo(this.map);
+  L.marker(this.coords, {icon: this.greenIcon}).addTo(this.map);
 
     //Add OSM Layer
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
