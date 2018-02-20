@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , ModalController } from 'ionic-angular';
 import { DbProvider } from '../../providers/db/db';
 
 /**
@@ -18,12 +18,18 @@ export class ListadoPage {
 
   sitios: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public db : DbProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl : ModalController,public db : DbProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListadoPage');
   }
+
+  muestraSitio(sitio){
+      let modalSitio = this.modalCtrl.create( 'ModalDetalleSitioPage', sitio );
+      modalSitio.present();
+  }
+
 
   ionViewDidEnter(){
      this.db.getSitios().then((res)=>{

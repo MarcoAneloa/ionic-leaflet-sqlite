@@ -15,7 +15,7 @@
 
 <ion-content padding>
 	<ion-list>
-  <ion-item *ngFor="let sitio of sitios">
+  <ion-item *ngFor="let sitio of sitios" (click)="muestraSitio(sitio)">
     <ion-thumbnail item-left>
       <img [src]="sitio.foto">
     </ion-thumbnail>
