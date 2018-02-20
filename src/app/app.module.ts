@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 import { SQLite } from '@ionic-native/sqlite';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 
 import { MyApp } from './app.component';
@@ -33,7 +34,8 @@ import { DbProvider } from '../providers/db/db';
     Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DbProvider,
-    SQLite
+    SQLite,
+    LaunchNavigator
   ]
 })
 export class AppModule {}
